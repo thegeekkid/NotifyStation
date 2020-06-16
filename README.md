@@ -77,6 +77,8 @@ The stations will need to connect to an API server... one is provided for free b
 ![Select icon](https://raw.githubusercontent.com/thegeekkid/NotifyStation/master/Screenshots/03-Streamdeck/09-Set_icon.png "Select Icon")
 1. Your launcher is now ready to use!  Run it and within a few seconds the notification should appear on the other computer.
 
+## Advanced - manual installation and self-hosting
+
 ### Installing from custom compiled source
   - Section coming soon
   
