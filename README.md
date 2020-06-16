@@ -9,7 +9,7 @@ The stations will need to connect to an API server... one is provided for free b
 ## Basic pre-compiled configuration
 
 ### Installation and configuration
-1. Download the installer from the [releases section][(https://github.com/thegeekkid/NotifyStation/releases).
+1. Download the installer from the [releases section](https://github.com/thegeekkid/NotifyStation/releases).
 1. Run the executable
 ![execute](https://raw.githubusercontent.com/thegeekkid/NotifyStation/master/Screenshots/01-Installation/01-execute.png "Execute")
 1. If prompted, accept the UAC prompt.
