@@ -39,6 +39,13 @@ namespace NotifyStation_GUI_Config
         {
             textBox2.Text = File.ReadAllText(WorkingDir + "api");
             textBox1.Text = File.ReadAllText(WorkingDir + "id");
+            if (File.ReadAllText(WorkingDir + "EnableLuxafor") == "True")
+            {
+                checkBox2.Checked = true;
+            }
+            textBox4.Text = File.ReadAllText(WorkingDir + "Luxafor");
+            comboBox1.SelectedItem = File.ReadAllText(WorkingDir + "LuxaforMode");
+            comboBox2.SelectedItem = File.ReadAllText(WorkingDir + "LuxaforColor");
 
             checkBox1.Checked = (checkRegKeyExist(@"Software\Microsoft\Windows\CurrentVersion\Run", "NotifyStation"));
         }
@@ -85,6 +92,10 @@ namespace NotifyStation_GUI_Config
         {
             File.WriteAllText(WorkingDir + "api", textBox2.Text);
             File.WriteAllText(WorkingDir + "id", textBox1.Text);
+            File.WriteAllText(WorkingDir + "EnableLuxafor", checkBox2.Checked.ToString());
+            File.WriteAllText(WorkingDir + "Luxafor", textBox4.Text);
+            File.WriteAllText(WorkingDir + "LuxaforMode", comboBox1.SelectedItem.ToString());
+            File.WriteAllText(WorkingDir + "LuxaforColor", comboBox2.SelectedItem.ToString());
 
             if (checkBox1.Checked)
             {
@@ -122,6 +133,16 @@ namespace NotifyStation_GUI_Config
         private void button1_Click(object sender, EventArgs e)
         {
             Register();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            label4.Visible = checkBox2.Checked;
+            label5.Visible = checkBox2.Checked;
+            label6.Visible = checkBox2.Checked;
+            comboBox1.Visible = checkBox2.Checked;
+            comboBox2.Visible = checkBox2.Checked;
+            textBox4.Visible = checkBox2.Checked;
         }
     }
 }

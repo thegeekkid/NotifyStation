@@ -64,6 +64,26 @@ namespace Notify_Station_GUI_notification
 
         private void showNotification()
         {
+            if (File.Exists(WorkingDir + "EnableLuxafor"))
+            {
+                string EnableLuxafor = File.ReadAllText(WorkingDir + "EnableLuxafor");
+                if (EnableLuxafor == "True")
+                {
+                    string LuxaforId = File.ReadAllText(WorkingDir + "Luxafor");
+                    string LuxaforMode = File.ReadAllText(WorkingDir + "LuxaforMode");
+                    string LuxaforColor = File.ReadAllText(WorkingDir + "LuxaforColor");
+                    LuxaforRequest lr = new LuxaforRequest();
+                    LuxaforActionFields laf = new LuxaforActionFields();
+                    laf.color = LuxaforColor;
+                    lr.userId = LuxaforId;
+                    lr.actionFields = laf;
+                    client = new RestClient(@"https://api.luxafor.com/webhook/v1/actions/");
+                    var request = new RestRequest(LuxaforMode, Method.POST);
+                    request.AddJsonBody(lr);
+                    IRestResponse response = client.Execute(request);
+                    var content = response.Content;
+                }
+            }
             if (this.InvokeRequired)
             {
                 this.BeginInvoke((MethodInvoker)delegate ()
@@ -89,8 +109,46 @@ namespace Notify_Station_GUI_notification
             e.Cancel = true;
             this.Visible = false;
             windowActive = false;
+            if (File.Exists(WorkingDir + "EnableLuxafor"))
+            {
+                string EnableLuxafor = File.ReadAllText(WorkingDir + "EnableLuxafor");
+                if (EnableLuxafor == "True")
+                {
+                    string LuxaforId = File.ReadAllText(WorkingDir + "Luxafor");
+                    LuxaforCustomRequest lr = new LuxaforCustomRequest();
+                    lr.userId = LuxaforId;
+                    LuxaforCustomColor lcc = new LuxaforCustomColor();
+                    lcc.color = "custom";
+                    lcc.custom_color = "000000";
+                    lr.actionFields = lcc;
+                    client = new RestClient(@"https://api.luxafor.com/webhook/v1/actions/");
+                    var request = new RestRequest("solid_color", Method.POST);
+                    request.AddJsonBody(lr);
+                    client.Execute(request);
+                }
+            }
         }
 
        
+    }
+
+    public class LuxaforRequest
+    {
+        public string userId { get; set; }
+        public LuxaforActionFields actionFields { get; set; }
+    }
+    public class LuxaforActionFields
+    {
+        public string color { get; set; }
+    }
+    public class LuxaforCustomRequest
+    {
+        public string userId { get; set; }
+        public LuxaforCustomColor actionFields { get; set; }
+    }
+    public class LuxaforCustomColor
+    {
+        public string color { get; set; }
+        public string custom_color { get; set; }
     }
 }
